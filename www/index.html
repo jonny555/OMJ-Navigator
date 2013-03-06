@@ -35,17 +35,6 @@ cb.showWebPage('http://pchip:8883/oversight/oversight.cgi');
 }
 
 </script>
-<script>
-function callNativePlugin( returnSuccess ) { 
-   applicationPreferences.callNativeFunction( nativePluginResultHandler, nativePluginErrorHandler, returnSuccess ); 
-} 
-function nativePluginResultHandler (result) { 
-   alert("SUCCESS: \r\n"+result ); 
-} 
-function nativePluginErrorHandler (error) { 
-   alert("ERROR: \r\n"+error ); 
-} 
-</script>
 <script> $('a[href^="http"]').live('tap', function(e){ e.preventDefault(); var url = $(this).attr("href"); window.plugins.childBrowser.showWebPage(url, { showNavigationBar: true, showLocationBar: true, showAddressBar: true, showToolBar: true }); }); </script>
 </head>
 <body onload='onBodyLoad();'>
@@ -56,9 +45,6 @@ function nativePluginErrorHandler (error) {
 <div data-role="content">
 <div class="icon"><img align="right" valign="top" SRC="icon.png"></div>
   <div class="content-primary">
-<h1>Hey, it's Cordova!</h1> 
-      <button onclick="callNativePlugin('success');">Click to invoke the Native Plugin with an SUCCESS!</button> 
-      <button onclick="callNativePlugin('error');">Click to invoke the Native Plugin with an ERROR!</button>
 			<ul data-role="listview" data-inset="true" data-theme="a" data-dividertheme="d" data-icon="false" class="homelist">
 				<li data-role="list-divider">Oversight jukebox</li>
 				<li data-icon="false"><a href="" id=lnk>Enter ip</a><input type='text' id='userInput' value='pchip:8883/oversight/oversight.cgi' /><input type='button' onclick='changeText2()' value='Ok'/></li>
