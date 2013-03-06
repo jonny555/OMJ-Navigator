@@ -35,6 +35,9 @@ cb.showWebPage('http://pchip:8883/oversight/oversight.cgi');
 }
 
 </script>
+<script>
+var preferences = cordova.require("cordova/plugin/applicationpreferences");
+</script>
 <script> $('a[href^="http"]').live('tap', function(e){ e.preventDefault(); var url = $(this).attr("href"); window.plugins.childBrowser.showWebPage(url, { showNavigationBar: true, showLocationBar: true, showAddressBar: true, showToolBar: true }); }); </script>
 </head>
 <body onload='onBodyLoad();'>
