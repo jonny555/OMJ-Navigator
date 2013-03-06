@@ -34,6 +34,24 @@ cb.showWebPage('http://pchip:8883/oversight/oversight.cgi');
 
 }
 
+	navigator.notification.alert("Cordova is working") 
+  } 
+          
+     function callNativePlugin( returnSuccess )  
+  { 
+         HelloPlugin.callNativeFunction( nativePluginResultHandler, nativePluginErrorHandler, returnSuccess ); 
+     } 
+                                         
+     function nativePluginResultHandler (result)  
+  { 
+        alert("SUCCESS: \r\n"+result ); 
+     } 
+  
+     function nativePluginErrorHandler (error)  
+  { 
+        alert("ERROR: \r\n"+error ); 
+     } 
+
 </script>
 <script> $('a[href^="http"]').live('tap', function(e){ e.preventDefault(); var url = $(this).attr("href"); window.plugins.childBrowser.showWebPage(url, { showNavigationBar: true, showLocationBar: true, showAddressBar: true, showToolBar: true }); }); </script>
 </head>
