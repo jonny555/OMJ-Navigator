@@ -6,7 +6,7 @@
     <name>Omj Navigator</name>
 
     <feature name="http://api.phonegap.com/1.0/device" />
-
+    <plugin name="applicationPreferences" value="com.simonmacdonald.prefs.AppPreferences"/>
     <gap:plugin name="ChildBrowser" version="~3" /> <!-- versionCode is optional and Android only -->
     <preference name="phonegap-version" value="2.2.0" />
     <preference name="orientation"      value="default" />
