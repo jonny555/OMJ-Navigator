@@ -24,22 +24,18 @@
 <script src="js/jquery.js"></script>
 <script src="js/jquery.mobile-1.2.0.js"></script>
 <link rel="stylesheet" href="css/index.css"/>
-<script type="text/javascript" charset="utf-8">
+<script> var cb;
 
-    // Wait for Cordova to load
-    //
-    document.addEventListener("deviceready", onDeviceReady, false);
+function onBodyLoad() { document.addEventListener("deviceready", onDeviceReady, false); } function onDeviceReady() { cb = window.plugins.childBrowser; }
 
-    // Cordova is ready
-    //
-    function onDeviceReady() {
-         var ref = window.open('http://apache.org', '_blank', 'location=yes');
-         ref.addEventListener('loadstart', function() { alert('start: ' + event.url); });
-         ref.addEventListener('loadstop', function() { alert('stop: ' + event.url); });
-         ref.addEventListener('exit', function() { alert(event.type); });
-    }
+function ldr() {
 
-    </script>
+cb.showWebPage('http://pchip:8883/oversight/oversight.cgi');
+
+}
+
+</script>
+<script> $('a[href^="http"]').live('tap', function(e){ e.preventDefault(); var url = $(this).attr("href"); window.plugins.childBrowser.showWebPage(url, { showNavigationBar: true, showLocationBar: true, showAddressBar: true, showToolBar: true }); }); </script>
 </head>
 <body onload='onBodyLoad();'>
 <div data-role="page" data-theme="a">
