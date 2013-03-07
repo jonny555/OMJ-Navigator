@@ -7,7 +7,6 @@
 
     <feature name="http://api.phonegap.com/1.0/device" />
     <gap:plugin name="ChildBrowser" version="~4" /> <!-- versionCode is optional and Android only -->
-    <preference name="phonegap-version" value="2.2.0" />
     <preference name="orientation"      value="default" />
     <preference name="target-device"    value="universal" />
     <preference name="fullscreen"       value="false" />
