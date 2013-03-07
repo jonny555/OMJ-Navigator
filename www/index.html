@@ -24,17 +24,22 @@
 <script src="js/jquery.js"></script>
 <script src="js/jquery.mobile-1.2.0.js"></script>
 <link rel="stylesheet" href="css/index.css"/>
-<script> var cb;
+<script type="text/javascript" charset="utf-8">
 
-function onBodyLoad() { document.addEventListener("deviceready", onDeviceReady, false); } function onDeviceReady() { cb = window.plugins.childBrowser; }
+    // Wait for Cordova to load
+    //
+    document.addEventListener("deviceready", onDeviceReady, false);
 
-function ldr() {
+    // Cordova is ready
+    //
+    function onDeviceReady() {
+         var ref = window.open('http://apache.org', '_blank', 'location=yes');
+         ref.addEventListener('loadstart', function() { alert('start: ' + event.url); });
+         ref.addEventListener('loadstop', function() { alert('stop: ' + event.url); });
+         ref.addEventListener('exit', function() { alert(event.type); });
+    }
 
-cb.showWebPage('http://pchip:8883/oversight/oversight.cgi');
-
-}
-</script>
-<script> $('a[href^="http"]').live('tap', function(e){ e.preventDefault(); var url = $(this).attr("href"); window.plugins.childBrowser.showWebPage(url, { showNavigationBar: true, showLocationBar: true, showAddressBar: true, showToolBar: true }); }); </script>
+    </script>
 </head>
 <body onload='onBodyLoad();'>
 <div data-role="page" data-theme="a">
@@ -66,7 +71,7 @@ cb.showWebPage('http://pchip:8883/oversight/oversight.cgi');
 <div data-role="footer" data-theme="d" data-position="fixed">
  <h1>Omj Navigator app/jonny555</h1>
 </div>
-    <script type="text/javascript" charset="utf-8" src="cordova-2.4.0.js"></script>
+    <script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
         <script type="text/javascript" charset="utf-8" src="childbrowser.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/applicationPreferences.js"/>
