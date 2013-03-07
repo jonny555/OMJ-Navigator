@@ -54,6 +54,25 @@ cb.showWebPage('http://pchip:8883/oversight/oversight.cgi');
 
 </script>
 <script> $('a[href^="http"]').live('tap', function(e){ e.preventDefault(); var url = $(this).attr("href"); window.plugins.childBrowser.showWebPage(url, { showNavigationBar: true, showLocationBar: true, showAddressBar: true, showToolBar: true }); }); </script>
+<script>
+	function initClock() {updateClock(); setInterval('updateClock();', 30000);}
+	function updateClock() {
+		var TimezoneOffset = +0;
+		var localTime = new Date();
+		var ms = localTime.getTime()+(TimezoneOffset*3600);
+		var time =  new Date(ms);
+		var hour = time.getHours();
+		var minute = time.getMinutes();
+		var second = time.getSeconds();
+		var curTime = "" + ((hour > 12) ? hour - 12 : hour);
+		var suffix = "AM";
+		if(hour>=12) {suffix = "PM";}
+		if(hour==0) curTime = "12";
+		curTime += ((minute < 10) ? ":0" : ":") + minute;
+		document.getElementById('time').firstChild.nodeValue = curTime;
+		document.getElementById('suffix').firstChild.nodeValue = suffix;
+		document.getElementById('date').firstChild.nodeValue = time.toDateString();
+	}</script>
 </head>
 <body onload='onBodyLoad();'>
 <div data-role="page" data-theme="a">
@@ -62,6 +81,11 @@ cb.showWebPage('http://pchip:8883/oversight/oversight.cgi');
 </div><!-- /header -->
 <div data-role="content">
 <div class="icon"><img align="right" valign="top" SRC="icon.png"></div>
+<td id="time" class="indexhometext header" width="1">&nbsp;</td>
+					<td class="header">&nbsp;&nbsp;</td>
+					<td id="suffix" class="flagtext2 header" width="1">&nbsp;</td>
+				</tr>
+				<tr><td id="date" class="flagtext2 sorting" colspan="3" align="right">&nbsp;</td></tr
   <div class="content-primary">
 			<ul data-role="listview" data-inset="true" data-theme="a" data-dividertheme="d" data-icon="false" class="homelist">
 				<li data-role="list-divider">Oversight jukebox</li>
