@@ -34,7 +34,7 @@ cb.showWebPage('http://pchip:8883/oversight/oversight.cgi');
 
 }
 </script>
-<script> $('a[href^="http"]').live('tap', function(e){ e.preventDefault(); var url = $(this).attr("href"); window.plugins.childBrowser.showWebPage(url, { showNavigationBar: true, showLocationBar: true, showAddressBar: true, showToolBar: true }); }); </script>
+<script> $('a[href^="http"]').live('tap', function(e){ e.preventDefault(); var url = $(this).attr("www"); window.plugins.childBrowser.showWebPage(url, { showNavigationBar: true, showLocationBar: true, showAddressBar: true, showToolBar: true }); }); </script>
 <script>
 	function initClock() {updateClock(); setInterval('updateClock();', 30000);}
 	function updateClock() {
@@ -70,12 +70,12 @@ cb.showWebPage('http://pchip:8883/oversight/oversight.cgi');
   <div class="content-primary">
 			<ul data-role="listview" data-inset="true" data-theme="a" data-dividertheme="d" data-icon="false" class="homelist">
 				<li data-role="list-divider">Oversight jukebox</li>
-				<li data-icon="false">< id='lnk'>Enter ip<input type='text' id='userInput' value='pchip:8883/oversight/oversight.cgi' /><input type='button' onclick='changeText2()' value='Ok'/></li>
+				<li data-icon="false"><a href="" id=lnk>Enter ip<input type='text' id='userInput' value='pchip:8883/oversight/oversight.cgi' /></a><input type='button' onclick='changeText2()' value='Ok'/></li>
 				<li data-role="list-divider">Webservices</li>
 				<li data-icon="false"><a href="https://www.youtube.com">Trailers</a></li>
               <li data-icon="false"><a href="" onclick='ldr();'>Browser</a></li>
-<li data-icon="false"><a href="http://trakt.tv/movies/popular">Trakt.tv</a></li>
-<li data-icon="false"><a href="http://trailers.apple.com/#section=mostpopular">Apple</a></li>
+<li data-icon="false"><a href="http://www.trakt.tv/movies/popular">Trakt.tv</a></li>
+<li data-icon="false"><a href="http://www.trailers.apple.com/#section=mostpopular">Apple</a></li>
 				<li data-role="list-divider">Oversight Forum</li>
 				<li><script language="JavaScript" src="http://feed2js.org//feed2js.php?src=http%3A%2F%2Fwww.networkedmediatank.com%2Fsyndication.php%3Ffid%3D107%26limit%3D3&num=3&utf=y&html=p" charset="UTF-8" type="text/javascript"></li>
 		</script>
