@@ -79,24 +79,44 @@ cb.showWebPage('http://trailers.apple.com/#section=mostpopular');
 
 }
 </script>
+<script>
+$(document).on("pageinit","#newpage",function(){
+    $('#saveButton').click(function() {
+        localStorage.setItem("name", $('#name').val());
+    });
+});
+
+
+$(document).on('pageshow','#newpage', function() {
+    var personName = localStorage.getItem("name");
+    if(personName.length>0){
+            $('#name').val(personName);
+    }
+});
+</script>
+<script type="text/javascript">
+function changeText2(){
+    var name = document.getElementById('name').value;
+    var lnk = document.getElementById('lnk');
+    lnk.href = "http://" + name;
+    lnk.innerHTML = lnk.href;
+}
+</script>
 </head>
 <body onload='onBodyLoad();'>
-<div data-role="page" data-theme="a">
+<div data-role="page" id="newpage" data-theme="a">
 <div data-role="header" data-theme="d">
  <h1>Omj Navigator</h1>
 </div><!-- /header -->
 <div data-role="content">
 <div class="icon"><img align="right" valign="top" SRC="icon.png"></div>
-<div class="icon"><td id="time" class="indexhometext header" width="1">&nbsp;</td>
-					<td class="header">&nbsp;&nbsp;</td>
-					<td id="suffix" class="flagtext2 header" width="1">&nbsp;</td>
-				</tr>
-				
-				<tr><td id="date" class="flagtext2 sorting" colspan="3" align="right">&nbsp;</td></tr></div>
   <div class="content-primary">
 			<ul data-role="listview" data-inset="true" data-theme="a" data-dividertheme="d" data-icon="false" class="homelist">
 				<li data-role="list-divider">Oversight jukebox</li>
-				<li data-icon="false"><a href="" id=lnk>Enter ip<input type='text' id='userInput' value='pchip:8883/oversight/oversight.cgi' /></a><input type='button' onclick='changeText2()' value='Ok'/></li>
+				<li data-icon="false"><a href="" id='lnk'>nothing here yet</a> <br>
+<input type='text' id='name' value='Enter Search String Here' />		
+        <a id="saveButton" onclick='changeText2()' value='' data-role="button">Save</a>
+    </li>
 				<li data-role="list-divider">Webservices</li>
 				<li data-icon="false"><a href="https://www.youtube.com" id='ldr();'>Trailers</a></li>
               <li data-icon="false"><a href="" onclick='ldr();'>Browser</a></li>
