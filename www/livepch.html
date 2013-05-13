@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="utf-8">
+<title>Live Remote</title>
+<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+
+<script language="JavaScript">
+
+var tid;
+var fastRefresh = 0;
+
+$(document).ready(init);
+
+function init()
+{
+	$("#timer").val("0");
+	$("#resolution").val("640");
+	screenCapture();
+}
+
+function screenCapture()
+{
+	var w = $("#resolution").attr("value");
+	var h = w / 16 * 9;
+
+	$("#screenCol").css("width", w + "px");
+	$("#screenCol").css("height", h + "px");
+	$("#screenControl").css("width", w + "px");
+	$("#screenControl").css("height", h + "px");
+
+	$(".button").css("width", (w / 10) + "px");
+	$(".button").css("height", (h / 8) + "px");
+	$(".button").css("font-size", (w / 48) + "px");
+
+	var url = "http://" + $("#ip").attr("value") + ":8008/system?arg0=capture_screen&arg1=/opt/sybhttpd/default/capturescreen1.jpg&arg2=" + w + "&arg3=" + h;
+
+	$("#cmd").load(url, null, refresh);
+}
+
+function refresh()
+{
+	var url = "http://" + $("#ip").attr("value") + ":8883/capturescreen1.jpg?" + Math.random()
+
+	new preloadImage(url, function()
+	{
+		$("#screen").attr("src", url);
+
+		var t = $("#timer").attr("value");
+		if (fastRefresh > 0)
+		{
+			fastRefresh--;
+			t = 1;
+		}
+
+		if (t > 0)
+		{
+			tid = setTimeout(function()
+			{
+				screenCapture();
+			}, t);
+		}
+	});
+}
+
+function preloadImage(url, callback)
+{
+	var pic = new Image();
+	pic.onload = function()
+	{
+		callback();
+	}
+	pic.src = url;
+}
+
+function sendKey(key)
+{
+	var url = "http://" + $("#ip").attr("value") + ":8008/system?arg0=send_key&arg1=" + key;
+
+	clearTimeout(tid);
+	fastRefresh = 1;
+	$("#cmd").load(url, null, screenCapture);
+}
+
+</script>
+
+<style type="text/css">
+.button { width:64px; height:45px; font-size:16px; }
+</style>
+</head>
+
+<body marginwidth="0" marginheight="0" leftmargin="0" topmargin="0">
+
+<div id="screenControl" style="position:absolute; top:0px; left:0px; opacity:.20; -moz-opacity:0.20; filter:alpha(opacity=20);">
+<table border="0" cellpadding="0" cellspacing="0" width="100%" height="100%">
+<tr>
+	<td align="left" valign="bottom">
+		<table border="0" cellpadding="0" cellspacing="0">
+			<tr>
+				<td align="left"><input type="button" onclick="sendKey('enter')" value="ENTER" class="button" /></td>
+			</tr>
+			<tr><td height="12"></td></tr>
+			<tr>
+				<td align="left"><input type="button" onclick="sendKey('up')" value="^" class="button" /></td>
+			</tr>
+			<tr><td height="5"></td></tr>
+			<tr>
+				<td align="left"><input type="button" onclick="sendKey('left')" value="<" class="button" /></td>
+				<td width="5"></td>
+				<td align="left"><input type="button" onclick="sendKey('right')" value=">" class="button" /></td>
+			</tr>
+			<tr><td height="5"></td></tr>
+			<tr>
+				<td align="left"><input type="button" onclick="sendKey('down')" value="v" class="button" /></td>
+			</tr>
+			<tr><td height="12"></td></tr>
+			<tr>
+				<td align="left"><input type="button" onclick="sendKey('return')" value="Return" class="button" /></td>
+			</tr>
+		</table>
+	</td>
+	<td align="right" valign="bottom">
+		<table border="0" cellpadding="0" cellspacing="0">
+			<tr>
+				<td align="right"><input type="button" onclick="sendKey('home')" value="HOME" class="button" /></td>
+			</tr>
+			<tr><td height="15"></td></tr>
+			<tr>
+				<td align="right"><input type="button" onclick="sendKey('info')" value="Info" class="button" /></td>
+			</tr>
+			<tr><td height="15"></td></tr>
+			<tr>
+				<td align="right"><input type="button" onclick="screenCapture()" value="Refresh" class="button" /></td>
+			</tr>
+		</table>
+	</td>
+</tr>
+</table>
+</div>
+
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+	<td valign="top" id="screenCol"><img id="screen" src="" /></td>
+	<td width="30"></td>
+	<td valign="top">
+		<table border="0" cellpadding="0" cellspacing="0">
+			<tr><td>Device IP:</td></tr>
+			<tr><td><input id="ip" type="text" value="192.168.0.10" style="width:100px;" /></td></tr>
+			<tr><td>Refresh:</td></tr>
+			<tr>
+				<td>
+					<select id="timer">
+						<option value="0">Don't Refresh</option>
+						<option value="1000">1 sec</option>
+						<option value="2000">2 sec</option>
+						<option value="3000">3 sec</option>
+						<option value="4000">4 sec</option>
+						<option value="5000">5 sec</option>
+						<option value="8000">8 sec</option>
+						<option value="10000">10 sec</option>
+						<option value="15000">15 sec</option>
+						<option value="30000">30 sec</option>
+						<option value="60000">1 min</option>
+					</select>
+				</td>
+			</tr>
+			<tr><td>Resolution:</td></tr>
+			<tr>
+				<td>
+					<select id="resolution">
+						<option value="1280">1280x720</option>
+						<option value="960">960x540</option>
+						<option value="640">640x360</option>
+						<option value="480">480x270</option>
+					</select>
+				</td>
+			</tr>
+		</table>
+	</td>
+</tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0">
+	<tr><td height="5"></td></tr>
+	<tr>
+		<td valign="top">
+			<table border="0" cellpadding="0" cellspacing="0">
+				<tr>
+					<td align="center"><input type="button" onclick="sendKey('prev')" value="Prev" class="button" /></td>
+					<td width="5"></td>
+					<td align="center"><input type="button" onclick="sendKey('next')" value="Next" class="button" /></td>
+					<td width="15"></td>
+					<td align="center"><input type="button" onclick="sendKey('red')" value="Red" class="button" style="background-color:red;" /></td>
+					<td width="5"></td>
+					<td align="center"><input type="button" onclick="sendKey('green')" value="Green" class="button" style="background-color:green;" /></td>
+					<td width="5"></td>
+					<td align="center"><input type="button" onclick="sendKey('yellow')" value="Yellow" class="button" style="background-color:yellow;" /></td>
+					<td width="5"></td>
+					<td align="center"><input type="button" onclick="sendKey('blue')" value="Blue" class="button" style="background-color:blue;" /></td>
+					<td width="15"></td>
+					<td align="center"><input type="button" onclick="sendKey('mute')" value="Mute" class="button" /></td>
+					<td width="5"></td>
+					<td align="center"><input type="button" onclick="sendKey('volumeup')" value="Vol+" class="button" /></td>
+				</tr>
+				<tr><td height="5"></td></tr>
+				<tr>
+					<td align="center"><input type="button" onclick="sendKey('play')" value="Play" class="button" /></td>
+					<td></td>
+					<td align="center"><input type="button" onclick="sendKey('pause')" value="Pause" class="button" /></td>
+					<td></td>
+					<td align="center"><input type="button" onclick="sendKey('subtitle')" value="Subtitle" class="button"/></td>
+					<td></td>
+					<td align="center"><input type="button" onclick="sendKey('audio')" value="Audio" class="button"/></td>
+					<td></td>
+					<td align="center"><input type="button" onclick="sendKey('zoom')" value="Zoom" class="button"/></td>
+					<td></td>
+					<td align="center"><input type="button" onclick="sendKey('angle')" value="Angle" class="button"/></td>
+					<td></td>
+					<td align="center"><input type="button" onclick="sendKey('repeat')" value="Repeat" class="button"/></td>
+					<td></td>
+					<td align="center"><input type="button" onclick="sendKey('volumedown')" value="Vol-" class="button" /></td>
+				</tr>
+				<tr><td height="5"></td></tr>
+				<tr>
+					<td align="center"><input type="button" onclick="sendKey('stop')" value="Stop" class="button" /></td>
+					<td></td>
+					<td align="center"><input type="button" onclick="sendKey('rewind')" value="Rewind" class="button" /></td>
+					<td></td>
+					<td align="center"><input type="button" onclick="sendKey('fwd')" value="Foward" class="button"/></td>
+					<td></td>
+					<td align="center"><input type="button" onclick="sendKey('time seek')" value="Seek" class="button"/></td>
+					<td></td>
+					<td align="center"><input type="button" onclick="sendKey('menu')" value="Menu" class="button" /></td>
+					<td></td>
+					<td align="center"><input type="button" onclick="sendKey('title')" value="Title" class="button"/></td>
+					<td></td>
+					<td align="center"><input type="button" onclick="sendKey('filemode')" value="File Mode" class="button"/></td>
+					<td></td>
+					<td align="center"><input type="button" onclick="sendKey('source')" value="Source" class="button"/></td>
+				</tr>
+				<tr><td height="5"></td></tr>
+				<tr>
+					<td align="center"><input type="button" onclick="sendKey('power')" value="Power" class="button"/></td>
+					<td></td>
+					<td align="center"><input type="button" onclick="sendKey('tvmode')" value="TV Mode" class="button"/></td>
+					<td></td>
+					<td align="center"><input type="button" onclick="sendKey('eject')" value="Eject" class="button"/></td>
+					<td colspan="9"></td>
+					<td align="center"><input type="button" onclick="sendKey('setup')" value="Setup" class="button"/></td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+</table>
+
+<div id="cmd"></div>
+
+</body>
+</html>
