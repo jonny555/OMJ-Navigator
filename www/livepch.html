@@ -86,6 +86,12 @@ function sendKey(key)
 }
 
 </script>
+<script type="text/javascript" charset="utf-8">
+$(document).bind("mobileinit", function() {
+$.mobile.page.prototype.options.addBackBtn = true;
+});
+     
+</script>
 
 <style type="text/css">
 .button { width:64px; height:45px; font-size:16px; }
@@ -93,8 +99,9 @@ function sendKey(key)
 </head>
 
 <body marginwidth="0" marginheight="0" leftmargin="0" topmargin="0">
-<div data-role="page" data-theme="a">
+<div data-role="page" id="new" data-theme="a" data-add-back-btn="true">
 <div data-role="header" data-theme="a">
+<a href="" data-mini="true" data-rel="back">Back</a>
  <h1>Omj Navigator/Live screen</h1>
 </div><!-- /header -->
 <div id="screenControl" style="position:absolute; top:0px; left:0px; opacity:.20; -moz-opacity:0.20; filter:alpha(opacity=20);">
@@ -173,7 +180,7 @@ function sendKey(key)
 			<tr>
 				<td>
 					<select id="resolution">
-						<option value="1280">1280x720</option>
+						<option value="1024">1024x768</option>
 						<option value="960">960x540</option>
 						<option value="640">640x360</option>
 						<option value="480">480x270</option>
