@@ -4,6 +4,11 @@
         id        = "com.phonegap.Omj Navigator"
         version   = "v2">
     <name>Omj Navigator</name>
+	<description>
+       omj navigator connects to oversight jukebox on nmt 
+	   features second screen seen whats on tv on tablet view and edit your moviejukebox remote full control
+	   omj navigator skin is needed for oversight and oversight must be fully set up first no pc needed after oversight is installed through csi
+   </description>
 
     <feature name="http://api.phonegap.com/1.0/device" />
     <gap:plugin name="ChildBrowser" version="~4" /> <!-- versionCode is optional and Android only -->
