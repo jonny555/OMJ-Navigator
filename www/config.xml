@@ -9,28 +9,43 @@
 	   features second screen seen whats on tv on tablet view and edit your moviejukebox remote full control
 	   omj navigator skin is needed for oversight and oversight must be fully set up first no pc needed after oversight is installed through csi
    </description>
-
     <feature name="http://api.phonegap.com/1.0/device" />
-    <gap:plugin name="ChildBrowser" version="4.2.1" /> <!-- versionCode is optional and Android only -->
+    <!-- versionCode is optional and Android only -->
     <preference name="ios-statusbarstyle" value="black-opaque" />
-    <preference name="phonegap-version" value="2.9..0" />
+    <preference name="phonegap-version" value="3.3.0" />
     <preference name="stay-in-webview" value="true" />
-    <preference name="orientation"      value="default" />
+    <preference name="orientation"      value="landscape" />
     <preference name="target-device"    value="universal" />
     <preference name="fullscreen"       value="false" />
-    <preference name="useBrowserHistory" value="false" />
+    <preference name="useBrowserHistory" value="true" />
     <icon src="icon.png" />
-    <gap:splash src="res/screen/android/screen-ldpi-portrait.png"  gap:platform="android" gap:density="ldpi" />
-    <gap:splash src="res/screen/android/screen-mdpi-portrait.png"  gap:platform="android" gap:density="mdpi" />
-    <gap:splash src="res/screen/android/screen-hdpi-portrait.png"  gap:platform="android" gap:density="hdpi" />
-    <gap:splash src="res/screen/android/screen-xhdpi-portrait.png" gap:platform="android" gap:density="xhdpi" />
-    <gap:splash src="res/screen/blackberry/screen-225.png"         gap:platform="blackberry" />
-    <gap:splash src="res/screen/ios/screen-iphone-portrait.png"    gap:platform="ios"     width="320" height="480" />
-    <gap:splash src="res/screen/ios/screen-iphone-portrait-2x.png" gap:platform="ios"     width="640" height="960" />
-    <gap:splash src="res/screen/ios/screen-ipad-portrait.png"      gap:platform="ios"     width="768" height="1024" />
-    <gap:splash src="res/screen/ios/screen-ipad-landscape.png"     gap:platform="ios"     width="1024" height="768" />
-    <gap:splash src="res/screen/windows-phone/screen-portrait.jpg" gap:platform="winphone" />
+    <icon src="splash.png" />   
+   <!-- Access elements control the Android whitelist. Domains are assumed blocked unless set otherwise -->
+	<!-- <access origin="https://example.com" /> allow any secure requests to example.com -->
+	<!-- <access origin="https://example.com" subdomains="true" /> such as above, but including subdomains, such as www -->
+	<!-- <access origin=".*" /> Allow all domains, suggested development use only -->
+	<access origin="http://127.0.0.1*" /> <!-- allow local pages -->     
+
+ <!-- PhoneGap features -->
+	<feature name="Contacts"><param name="android-package" value="org.apache.cordova.ContactManager" /></feature>
+    <feature name="Device"><param name="android-package" value="org.apache.cordova.Device" /></feature>
+	<feature name="Echo"><param name="android-package" value="org.apache.cordova.Echo" /></feature>
+    <feature name="File"><param name="android-package" value="org.apache.cordova.FileUtils" /></feature>
+	<feature name="FileTransfer"><param name="android-package" value="org.apache.cordova.FileTransfer" /></feature>
+	<feature name="Geolocation"><param name="android-package" value="org.apache.cordova.GeoBroker" /></feature>
+	<feature name="Globalization"><param name="android-package" value="org.apache.cordova.Globalization" /></feature>
+	<feature name="InAppBrowser"><param name="android-package" value="org.apache.cordova.InAppBrowser" /></feature>
+     <gap:splash src="splash.png" /> 
+	<feature name="Storage"><param name="android-package" value="org.apache.cordova.Storage" /></feature>   
     
-     <access origin="http://phonegap.com" browserOnly="true" />
+<!-- additional plugins -->
+	<feature name="AndroidPreferences"><param name="android-package" value="org.apache.cordova.plugins.AndroidPreferences" /></feature>
+	<feature name="HomeButton"><param name="android-package" value="org.apache.cordova.plugins.HomeButton" /></feature>
+	<feature name="PackageVersion"><param name="android-package" value="org.apache.cordova.plugins.PackageVersion" /></feature>
+	<feature name="PreferredScreenSize"><param name="android-package" value="org.apache.cordova.plugins.PreferredScreenSize" /></feature>
+	<feature name="Share"><param name="android-package" value="org.apache.cordova.plugins.Share" /></feature>
+	<feature name="Toasts"><param name="android-package" value="org.apache.cordova.plugins.Toasts" /></feature>	
+
+   
     
 </widget>
